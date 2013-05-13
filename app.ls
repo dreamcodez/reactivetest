@@ -17,11 +17,10 @@ $d.on \keyup, 'input[name=degrees]', ->
     r-degrees-str str
 
 r-result = $R((unit, degrees-str) ->
-  degrees = parse-int degrees-str
-
   if degrees-str is ''
     'Please enter the amount of degrees'
   else
+    degrees = parse-int degrees-str
     if is-NaN degrees
       '<strong style=\"color:red">Please enter a real value for degrees</strong>'
     else if unit is \C

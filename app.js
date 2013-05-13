@@ -22,10 +22,10 @@
   });
   rResult = $R(function(unit, degreesStr){
     var degrees;
-    degrees = parseInt(degreesStr);
     if (degreesStr === '') {
       return 'Please enter the amount of degrees';
     } else {
+      degrees = parseInt(degreesStr);
       if (isNaN(degrees)) {
         return '<strong style="color:red">Please enter a real value for degrees</strong>';
       } else if (unit === 'C') {
