@@ -1,0 +1,6 @@
+#!/bin/bash
+killall -9 node livescript lsc stylus jade
+set -e
+lsc -ckw . >> livescript.log 2>&1 &
+stylus -w -c . >> stylus.log 2>&1 &
+jade -w . >> jade.log 2>&1 &
