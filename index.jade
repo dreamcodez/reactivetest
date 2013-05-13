@@ -1,0 +1,24 @@
+!!! 5
+html
+  head
+    title my reactivejs test
+    script(type='text/javascript', src='http://code.jquery.com/jquery-1.9.1.min.js')
+    script(type='text/javascript', src='reactive.js')
+    script(type='text/javascript', src='app.js')
+  body
+    div
+      label
+        input(type='text', name='degrees')
+        | Degrees
+    div
+      label
+        input(type='radio', name='unit', value='F', checked)
+        | Fahrenheit
+    div
+      label
+        input(type='radio', name='unit', value='C')
+        | Celsius
+    div
+      strong Result:
+      blockquote
+        #result Please enter the amount of degrees
