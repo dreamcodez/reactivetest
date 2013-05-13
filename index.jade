@@ -2,9 +2,15 @@
 html
   head
     title my reactivejs test
-    script(type='text/javascript', src='http://code.jquery.com/jquery-1.9.1.min.js')
-    script(type='text/javascript', src='reactive.js')
-    script(type='text/javascript', src='app.js')
+    script(type='text/javascript', src='http://cdnjs.cloudflare.com/ajax/libs/headjs/0.99/head.load.min.js')
+    |<script type="text/javascript">
+    |  head.js('http://code.jquery.com/jquery-1.9.1.min.js'
+    |         ,'https://raw.github.com/mattbaker/Reactive.js/master/src/reactive.js'
+    |         ,'http://threejs.org/build/three.min.js'
+    |         ,'app.js'
+    |         ,'threejs-demo.js'
+    |         )
+    |</script>
   body
     div
       label
@@ -22,3 +28,5 @@ html
       strong Result:
       blockquote
         #result Please enter the amount of degrees
+
+    #container
