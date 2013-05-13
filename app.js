@@ -1,5 +1,5 @@
 (function(){
-  var c2f, f2c, $d, rUnit, rDegreesStr, rResult;
+  var c2f, f2c, $d, $rPane, rUnit, rDegreesStr, rResult;
   c2f = function(degreesC){
     return degreesC * 1.8 + 32;
   };
@@ -7,6 +7,16 @@
     return (degreesF - 32) / 1.8;
   };
   $d = $(document);
+  $rPane = $R.state($('#container'));
+  $d.on('click', '[data-select-pane]', function(){
+    $rPane($($(this).data('select-pane')));
+    return false;
+  });
+  $R(function($pane){
+    $('.pane.active').removeClass('active');
+    $pane.addClass('active');
+    return console.log($pane);
+  }).bindTo($rPane);
   rUnit = $R.state('F');
   $d.on('change', 'input:radio:checked[name=unit]', function(){
     return rUnit($(this).val());

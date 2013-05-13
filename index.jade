@@ -2,6 +2,7 @@
 html
   head
     title my reactivejs test
+    link(rel='stylesheet', type='text/css', href='app.css')
     script(type='text/javascript', src='http://cdnjs.cloudflare.com/ajax/libs/headjs/0.99/head.load.min.js')
     |<script type="text/javascript">
     |  head.js('http://code.jquery.com/jquery-1.9.1.min.js'
@@ -13,20 +14,26 @@ html
     |</script>
   body
     div
-      label
-        input(type='text', name='degrees', autofocus)
-        | Degrees
-    div
-      label
-        input(type='radio', name='unit', value='F', checked)
-        | Fahrenheit
-    div
-      label
-        input(type='radio', name='unit', value='C')
-        | Celsius
-    div
-      strong Result:
-      blockquote
-        #result Please enter the amount of degrees
+      a(href='#', data-select-pane='#calculator') Calculator
+      | |
+      a(href='#', data-select-pane='#container') Sphere
 
-    #container
+    .pane.active#calculator
+      div
+        label
+          input(type='text', name='degrees', autofocus)
+          | Degrees
+      div
+        label
+          input(type='radio', name='unit', value='F', checked)
+          | Fahrenheit
+      div
+        label
+          input(type='radio', name='unit', value='C')
+          | Celsius
+      div
+        strong Result:
+        blockquote
+          #result Please enter the amount of degrees
+
+    .pane#container

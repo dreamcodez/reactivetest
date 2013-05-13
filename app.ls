@@ -6,6 +6,18 @@ f2c = (degrees-f) ->
 
 $d = $ document
 
+$r-pane = $R.state $('#container')
+
+$d.on \click, '[data-select-pane]', ->
+  $r-pane $($(this).data(\select-pane))
+  return false
+
+$R(($pane) ->
+  $('.pane.active').remove-class 'active'
+  $pane.add-class 'active'
+  console.log $pane
+).bind-to($r-pane)
+
 r-unit = $R.state 'F'
 $d.on \change, 'input:radio:checked[name=unit]', -> r-unit $(this).val!
 
