@@ -6,21 +6,29 @@ f2c = (degrees-f) ->
 
 $d = $ document
 
-r-unit = $R.state!
+r-unit = $R.state 'F'
 $d.on \change, 'input:radio:checked[name=unit]', -> r-unit $(this).val!
 
-r-degrees = $R.state!
-$d.on \keyup, 'input[name=degrees]', -> r-degrees parse-int($(this).val!)
+r-degrees-str = $R.state ''
+$d.on \keyup, 'input[name=degrees]', ->
+  last-str = r-degrees-str!
+  str = $(this).val!
+  if str != last-str
+    r-degrees-str str
 
-r-result = $R((unit, degrees) ->
-  if degrees
-    if unit is \C
-      "<strong>#{c2f(degrees).to-fixed 2}</strong> degrees <em>Fahrenheit</em>"
-    else
-      "<strong>#{f2c(degrees).to-fixed 2}</strong> degrees <em>Celsius</em>"
+r-result = $R((unit, degrees-str) ->
+  degrees = parse-int degrees-str
+
+  if degrees-str is ''
+    'Please enter the amount of degrees'
   else
-    "<strong style=\"color:red\">Please enter a valid integer</strong>"
-).bind-to r-unit, r-degrees
+    if is-NaN degrees
+      '<strong style=\"color:red">Please enter a real value for degrees</strong>'
+    else if unit is \C
+      "<strong>#{c2f(degrees).to-fixed 2}</strong> degrees <em>Fahrenheit</em>"
+    else if unit is \F
+      "<strong>#{f2c(degrees).to-fixed 2}</strong> degrees <em>Celsius</em>"
+).bind-to r-unit, r-degrees-str
 
 $R((res) ->
   $ '#result' .html res
