@@ -6,6 +6,34 @@ f2c = (degrees-f) ->
 
 $d = $ document
 
+window.get-page = ->
+  s = History.get-state!
+  parser = document.create-element \a
+  parser.href = s.url
+  window.parser = parser
+
+  # no host, just path
+  uri = parser.pathname + parser.search
+
+  {uri, s.title, s.data}
+
+# read-only variable for tracking page info
+window.page = get-page!
+
+# setup initial state of rendered html, grab title from document
+# this is so title information is correct when on initial loaded page
+# normally it is a blank string ''
+# eventually we may have an initial history data too.. if we ever use history data
+History.replace-state {}, document.title, page.uri
+
+window.r-page = $R.state page
+
+# state changes from back/forward button updates r-page reactive variable
+History.Adapter.bind window, \statechange, -> r-page(get-page!)
+
+# read-only variable for tracking page info
+$R(-> window.page = it).bind-to r-page
+
 $r-pane = $R.state $('#container')
 
 $d.on \click, '[data-select-pane]', ->
